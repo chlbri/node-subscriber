@@ -1,0 +1,50 @@
+{
+  "name": "reactjs",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "scripts": {
+    "dev": "vite dev --port 3000",
+    "generate-routes": "tsr generate",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:only": "vitest run --no-coverage",
+    "pretest": "pnpm run build",
+    "fmt": "oxfmt",
+    "lint": "oxlint --fix && pnpm run fmt",
+    "_ci": "pnpm run lint && pnpm run test"
+  },
+  "dependencies": {
+    "@bemedev/react-subscriber": "workspace:^",
+    "@bemedev/react-sync": "^0.1.1",
+    "@tanstack/react-router": "latest",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@bemedev/dev-utils": "^1.1.1",
+    "@tanstack/router-cli": "^1.167.21",
+    "@tanstack/router-plugin": "latest",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "jsdom": "^30.0.1",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "lightningcss"
+    ]
+  }
+}

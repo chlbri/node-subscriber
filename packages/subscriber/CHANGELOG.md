@@ -6,6 +6,22 @@
 <details>
 <summary>
 
+## **[0.3.0] - 04/08/2026** => _23:07_
+
+</summary>
+
+- Added `defaultSelector` helper identity function
+- Enhanced JSDoc documentation standards across exported types, helper
+  functions, and class methods
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.2.0] - 04/08/2026** => _18:07_
 
 </summary>

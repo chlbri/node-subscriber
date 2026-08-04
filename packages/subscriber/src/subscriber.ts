@@ -16,9 +16,9 @@ import type {
  * @template T - Type of data emitted by the source subscribable.
  * @template R - Type of selected value derived from state, defaulting to `T`.
  */
-export class SubscriberBuilderClass<T, R = T> {
+class SubscriberBuilderClass<T, R = T> {
   /**
-   * Creates an instance of -- class {@linkcode SubscriberBuilderClass}.
+   * Creates an instance of class {@linkcode SubscriberBuilderClass}.
    *
    * @param __subscribable - Source subscribable of type {@linkcode Subscribable}.
    * @param __selector - Optional selector function of type {@linkcode Selector_F}.
@@ -88,9 +88,7 @@ export class SubscriberBuilderClass<T, R = T> {
  * @template T - Type of data emitted by the source subscribable.
  * @template R - Type of selected value derived from state, defaulting to `T`.
  */
-export class SubscriberClass<T, R = T>
-  implements Disposable, AsyncDisposable
-{
+class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
   /**
    * Current lifecycle state of the subscriber.
    */
@@ -136,6 +134,8 @@ export class SubscriberClass<T, R = T>
    * @param __subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
    * @param __selector - Optional selector function of type {@linkcode Selector_F}.
    * @param __equals - Optional equality comparator function of type {@linkcode Equals_F}.
+   *
+   * @see {@linkcode normalEquals}
    */
   constructor(
     private __subscribable: Subscribable<T>,
@@ -311,9 +311,13 @@ export type SubscriberBuilder<T, R = T> = SubscriberBuilderClass<T, R>;
 export type Subscriber<T, R = T> = SubscriberClass<T, R>;
 
 /**
- * Factory function signature for creating subscriber builder instances.
+ * Factory function signature for creating subscriber builder instances of class {@linkcode SubscriberBuilderClass}.
  *
  * @template T - Data type of subscriber state.
+ *
+ * @param subscribable - Source subscribable of type {@linkcode Subscribable}.
+ *
+ * @returns A new instance of class {@linkcode SubscriberBuilderClass}.
  */
 export type CreateSubscriber_F = <T>(
   subscribable: Subscribable<T>,

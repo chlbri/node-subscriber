@@ -88,6 +88,8 @@ export type CompletionObserver<T> = {
  * Union type of observer configurations requiring at least one notification handler.
  *
  * @template T - Type of data emitted by the source.
+ *
+ * @see type {@linkcode NextObserver}, type {@linkcode ErrorObserver}, type {@linkcode CompletionObserver}
  */
 export type PartialObserver<T> =
   | NextObserver<T>
@@ -140,6 +142,8 @@ export type SubscriberState =
  * Function signature for a subscriber callback receiving state updates of type `T`.
  *
  * @template T - Type of data passed to the subscriber.
+ *
+ * @see type {@linkcode Fn}
  */
 export type Subscriber_F<T> = Fn<[T], void>;
 
@@ -152,6 +156,8 @@ export type Subscriber_F<T> = Fn<[T], void>;
  * @param b - Second value to compare.
  *
  * @returns type {@linkcode boolean} indicating whether `a` and `b` are equal.
+ *
+ * @see type {@linkcode Fn}
  */
 export type Equals_F<T> = Fn<[T, T], boolean>;
 
@@ -164,6 +170,8 @@ export type Equals_F<T> = Fn<[T, T], boolean>;
  * @param val - Input state value of type `T`.
  *
  * @returns Selected value of type `R`.
+ *
+ * @see type {@linkcode Fn}
  */
 export type Selector_F<T, R = any> = Fn<[T], R>;
 
@@ -185,3 +193,5 @@ export type Subscribable<T> = {
     Unsubscribable
   >;
 };
+
+export type * from '#bemedev/globals/types';

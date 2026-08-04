@@ -1,11 +1,18 @@
 {
-  "name": "@bemedev/subscriber",
+  "name": "@bemedev/solid-subscriber",
   "version": "0.3.0",
-  "description": "Subscriber package, a recursive subscription manager.",
+  "description": "SolidJS primitive to subscribe to any Subscribable using @bemedev/subscriber",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./lib/index.js"
+    }
+  },
   "files": [
     "lib",
     "./LICENSE",
@@ -17,31 +24,19 @@
     "name": "chlbri",
     "url": "https://bemedev.vercel.app"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chlbri/node-subscriber/tree/main/packages/subscriber"
-  },
-  "maintainers": [
-    {
-      "email": "bri_lvi@icloud.com",
-      "name": "chlbri",
-      "url": "https://bemedev.vercel.app"
-    }
-  ],
-  "contributors": [
-    {
-      "email": "bri_lvi@icloud.com",
-      "name": "chlbri",
-      "url": "https://bemedev.vercel.app"
-    }
-  ],
+  "license": "MIT",
   "keywords": [
+    "solidjs",
+    "solid",
+    "signal",
     "subscriber",
     "subscribe",
-    "rescursive",
-    "manager",
-    "subscription"
+    "rxjs",
+    "state"
   ],
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "build": "pnpm run rm:lib && pnpm run rolldown",
     "rm:lib": "pnpx rimraf ./lib",
@@ -52,13 +47,24 @@
     "size": "size-limit",
     "_ci": "pnpm run lint && pnpm run pretest"
   },
+  "peerDependencies": {
+    "solid-js": "^1.9.14"
+  },
+  "dependencies": {
+    "@bemedev/subscriber": "workspace:^"
+  },
   "devDependencies": {
     "@bemedev/dev-utils": "^1.1.1",
     "@size-limit/file": "^13.0.3",
+    "@solidjs/testing-library": "^0.8.10",
     "@types/node": "^26.1.2",
-    "rolldown": "^1.2.2",
+    "jsdom": "^30.0.1",
+    "rolldown": "1.2.2",
+    "rxjs": "^7.8.2",
     "size-limit": "^13.0.3",
+    "solid-js": "^1.9.14",
     "typescript": "^7.0.2",
+    "vite-plugin-solid": "^2.11.14",
     "vitest": "4.1.10"
   },
   "size-limit": [

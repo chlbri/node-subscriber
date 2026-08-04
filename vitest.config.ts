@@ -11,12 +11,16 @@ export default defineConfig({
       enabled: true,
       reportsDirectory: '.coverage',
       provider: 'v8',
-      exclude: ['*.ts'],
+      exclude: ['**/*.ts'],
     },
 
     projects: [
       'packages/subscriber/vitest.config.ts',
       'packages/__tests__/project1/vitest.config.ts',
+      'packages/reactjs/vitest.config.ts',
+      'packages/solidjs/vitest.config.ts',
+      'apps/reactjs/vitest.config.ts',
+      'apps/solidjs/vitest.config.ts',
     ],
   },
 });

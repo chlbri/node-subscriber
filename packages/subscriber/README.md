@@ -150,6 +150,22 @@ to a subscribable source.
 - **`subscribable`**: `Subscribable<T>` — Source subscribable object.
 - **Returns**: `SubscriberBuilderClass<T, T>`
 
+### `defaultSelector(a)`
+
+Identity selector function that returns the input value unchanged.
+
+- **`a`**: `T` — Input value.
+- **Returns**: `R` — Input value cast to output type `R`.
+
+### `normalEquals(a, b)`
+
+Strict equality (`===`) comparator function used as default equality
+checker.
+
+- **`a`**: `T` — First value to compare.
+- **`b`**: `T` — Second value to compare.
+- **Returns**: `boolean` — `true` if `a === b`, otherwise `false`.
+
 ### `SubscriberBuilderClass<T, R>`
 
 Builder class used to chain selector transformations and create active

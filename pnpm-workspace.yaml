@@ -1,6 +1,10 @@
 packages:
   - 'packages/subscriber'
   - 'packages/__tests__/project1'
+  - 'packages/reactjs'
+  - 'packages/solidjs'
+  - 'apps/reactjs'
+  - 'apps/solidjs'
 
 allowBuilds:
   esbuild: true

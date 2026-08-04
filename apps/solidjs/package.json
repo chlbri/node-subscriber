@@ -1,0 +1,42 @@
+{
+  "name": "solidjs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --port 3000",
+    "generate-routes": "tsr generate",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pretest": "pnpm run build",
+    "test": "vitest run",
+    "test:only": "vitest run --no-coverage",
+    "fmt": "oxfmt",
+    "lint": "oxlint --fix && pnpm run fmt",
+    "_ci": "pnpm run lint && pnpm run test"
+  },
+  "dependencies": {
+    "@bemedev/solid-subscriber": "workspace:^",
+    "@tanstack/solid-router": "latest",
+    "rxjs": "^7.8.2",
+    "solid-js": "^1.9.14"
+  },
+  "devDependencies": {
+    "@bemedev/dev-utils": "^1.1.1",
+    "@solidjs/testing-library": "^0.8.10",
+    "@tanstack/router-cli": "^1.167.21",
+    "@tanstack/router-plugin": "latest",
+    "jsdom": "^30.0.1",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.0",
+    "vite-plugin-solid": "^2.11.14",
+    "vitest": "^4.1.10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "lightningcss"
+    ]
+  }
+}
