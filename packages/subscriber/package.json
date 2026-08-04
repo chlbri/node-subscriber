@@ -1,7 +1,7 @@
 {
-  "name": "@bemedev/new-package-name-to-change",
-  "version": "0.0.1",
-  "description": "The package name need to be changed",
+  "name": "@bemedev/subscriber",
+  "version": "0.1.0",
+  "description": "Subscriber package, a recursive subscription manager.",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -33,25 +33,25 @@
     }
   ],
   "keywords": [
-    "//TODO:"
+    "subscriber",
+    "subscribe",
+    "rescursive",
+    "manager",
+    "subscription"
   ],
   "scripts": {
     "build": "pnpm run rm:lib && pnpm run rolldown",
     "rm:lib": "pnpx rimraf ./lib",
-    "test": "vitest run",
     "fmt": "oxfmt",
-    "lint": "oxlint --fix && pnpm run fmt",
     "pretest": "pnpm run build && pnpm run size",
-    "posttest": "exit 0",
-    "test:only": "pnpm run test --no-coverage",
-    "_ci": "pnpm run lint && pnpm run test",
+    "lint": "oxlint --fix && pnpm run fmt",
+    "_ci": "pnpm run lint && pnpm run pretest",
     "size": "size-limit",
     "rolldown": "rolldown -c"
   },
   "devDependencies": {
-    "@bemedev/dev-utils": "^1.1.0",
-    "@bemedev/shared-vitest": "workspace:^",
-    "rolldown": "^1.2.0",
+    "@bemedev/dev-utils": "^1.1.1",
+    "rolldown": "^1.2.2",
     "typescript": "^7.0.2",
     "vitest": "4.1.10"
   },

@@ -37,6 +37,12 @@ let violations = 0;
 for (let x = 0; x < tests.length - 1; x++) {
   const t1 = tests[x];
   const t2 = tests[x + 1];
+  const gapLines = lines.slice(t1.endLine, t2.lineNum - 1);
+  const crossesBlock = gapLines.some(l =>
+    /^\s*(describe\(|\}\);?|const\s|let\s|var\s)/.test(l),
+  );
+  if (crossesBlock) continue;
+
   const gap = t2.lineNum - t1.endLine - 1;
   const bothSingle = t1.type === 'single' && t2.type === 'single';
   const expected = bothSingle ? 0 : 1;

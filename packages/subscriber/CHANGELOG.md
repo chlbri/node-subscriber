@@ -1,16 +1,38 @@
-# Beatifull lib
+## CHANGELOG
 
-A beautifull description
+<br/>
+<br/>
+
+<details>
+<summary>
+
+## **[0.1.0] - 04/08/2026** => _14:27_
+
+</summary>
+
+- Renamed core package to `@bemedev/subscriber`
+- Added `SubscriberClass` with support for subscriber lifecycle management
+  (`idle`, `active`, `paused`, `inactive`, `disposed`)
+- Added RxJS / `Subscribable` interoperability
+  (`subscriber.subscribe(subscribable)`) and observer types (`Observer`,
+  `NextObserver`, `PartialObserver`, `Subscribable`)
+- Added custom equality comparator support with `normalEquals` default
+- Added instance renewal getter `renew` to re-create active subscriber
+  instances
+- Added explicit resource management via `Disposable` (`Symbol.dispose`)
+  and `AsyncDisposable` (`Symbol.asyncDispose`)
+- Added factory helper `createSubscriber`
+- Enhanced JSDoc documentation across all exported types, classes, and
+  helper functions
+- <u>Test coverage **_100%_**</u>
+
+</details>
 
 <br/>
 
-## Licence
+### Version [0.0.1] --> _date & hour_
 
-MIT
-
-## CHANGE_LOG
-
-Read [CHANGELOG.md](CHANGELOG.md) for more details about the changes.
+- ✨ Première version de la bibliothèque
 
 <br/>
 

@@ -2,6 +2,7 @@
   "name": "project1",
   "version": "0.0.1",
   "type": "module",
+  "private": true,
   "scripts": {
     "test": "vitest run",
     "fmt": "oxfmt",
@@ -11,8 +12,8 @@
     "_ci": "pnpm run lint && pnpm run test"
   },
   "devDependencies": {
-    "@bemedev/new-package-name-to-change": "workspace:^",
-    "@bemedev/shared-vitest": "workspace:^",
+    "@bemedev/subscriber": "workspace:^",
+    "rxjs": "^7.8.2",
     "typescript": "^7.0.2"
   }
 }

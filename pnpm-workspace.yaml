@@ -1,12 +1,13 @@
 packages:
-  - 'packages/core'
+  - 'packages/subscriber'
   - 'packages/__tests__/project1'
-  - 'packages/utils/vitest'
 
 allowBuilds:
   esbuild: true
 
+nodeLinker: hoisted
+
 minimumReleaseAge: 300
 
 minimumReleaseAgeExclude:
-  - '@bemedev/dev-utils@0.8.2'
+  - '@bemedev/*'
