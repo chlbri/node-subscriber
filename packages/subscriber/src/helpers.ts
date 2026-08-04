@@ -6,6 +6,5 @@
  * @param a - First value to compare.
  * @param b - Second value to compare.
  *
- * @returns `-- type {@linkcode boolean}` indicating strict equality.
  */
 export const normalEquals = <T>(a: T, b: T) => a === b;

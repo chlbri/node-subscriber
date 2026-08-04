@@ -6,6 +6,35 @@
 <details>
 <summary>
 
+## **[0.2.0] - 04/08/2026** => _18:07_
+
+</summary>
+
+- **Breaking Change**: Refactored `createSubscriber` factory function to
+  accept a `Subscribable` source as argument
+- **Breaking Change**: Updated `SubscriberClass` constructor signature to
+  `(subscribable, subscriber?, selector?, equals?)`
+- **Breaking Change**: Removed `renew` property from `SubscriberClass`
+- Added `SubscriberBuilderClass` introducing a fluent builder pattern with
+  `.select(selector)` for chaining state transformations and
+  `.subscribe(subscriber, equals)` for creating active subscriber nodes
+- Added `reSubscribe()` method to `SubscriberClass` to reconnect an
+  inactive subscriber node to its source subscribable
+- Added `selector`, `equals`, and `subscribable` getters to
+  `SubscriberClass`
+- Enhanced `dispose()` method in `SubscriberClass` to deallocate internal
+  references upon disposal
+- Enhanced JSDoc documentation standards across all exported types,
+  classes, methods, and helper functions
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.1.0] - 04/08/2026** => _14:27_
 
 </summary>

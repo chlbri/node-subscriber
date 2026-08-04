@@ -1,8 +1,8 @@
 # @bemedev/subscriber
 
 A feature-rich, lifecycle-aware subscription manager supporting RxJS /
-`Subscribable` interoperability, custom equality comparators, state
-control, and explicit resource disposal (`Disposable`).
+`Subscribable` interoperability, fluent selector chaining, custom equality
+comparators, state control, and explicit resource disposal (`Disposable`).
 
 <br/>
 
@@ -11,14 +11,15 @@ control, and explicit resource disposal (`Disposable`).
 - ⚡ **RxJS / Observable Integration**: Subscribe seamlessly to any
   `Subscribable` source (RxJS Observables, Subjects, BehaviorSubjects, or
   custom emitters).
+- 🔗 **Fluent Builder & Selector Chaining**: Chain nested state selectors
+  using `.select(selector)` to compute derived state and only react to
+  specific sub-state changes.
 - 🔍 **Custom Equality Comparators**: Prevent redundant subscriber
   notifications by comparing previous and current values using custom
   comparator functions or strict equality (`normalEquals`).
 - ⏸ **Lifecycle Control**: Granular state management across lifecycle
-  states (`idle`, `active`, `paused`, `inactive`, `disposed`) using
-  `open()`, `close()`, `unsubscribe()`, and `dispose()`.
-- 🔁 **Instance Renewal**: Effortlessly re-create active subscriber
-  instances with `.renew`.
+  states (`active`, `paused`, `inactive`, `disposed`) using `open()`,
+  `close()`, `unsubscribe()`, and `dispose()`.
 - 🧹 **Explicit Resource Disposal**: Native support for
   JavaScript/TypeScript `Disposable` (`Symbol.dispose` and
   `Symbol.asyncDispose`) for use with `using` declarations.
@@ -48,18 +49,36 @@ import { Subject } from 'rxjs';
 // Create a subject source
 const source$ = new Subject<number>();
 
-// Create a subscriber node
-const subscriber = createSubscriber<number>(val => {
+// Create a subscriber node from source
+const subscriber = createSubscriber(source$).subscribe(val => {
   console.log(`Received value: ${val}`);
 });
-
-// Subscribe to the source
-subscriber.subscribe(source$);
 
 // Emit values from source
 source$.next(1); // Logs: "Received value: 1"
 source$.next(1); // Skipped due to equality check (default normalEquals)
 source$.next(2); // Logs: "Received value: 2"
+```
+
+### Selector Chaining
+
+```ts
+import { createSubscriber } from '@bemedev/subscriber';
+import { BehaviorSubject } from 'rxjs';
+
+type State = { user: { name: string; age: number } };
+const state$ = new BehaviorSubject<State>({
+  user: { name: 'Alice', age: 30 },
+});
+
+// Chain selectors to transform emission values
+const subscriber = createSubscriber(state$)
+  .select(state => state.user)
+  .select(user => user.name)
+  .subscribe(name => console.log(`Name: ${name}`));
+
+state$.next({ user: { name: 'Alice', age: 31 } }); // Skipped (selected name unchanged)
+state$.next({ user: { name: 'Bob', age: 31 } }); // Logs: "Name: Bob"
 ```
 
 ### Custom Equality Comparator
@@ -72,12 +91,10 @@ type User = { id: string; name: string };
 const source$ = new Subject<User>();
 
 // Ignore notifications if user ID hasn't changed
-const subscriber = createSubscriber<User>(
+const subscriber = createSubscriber(source$).subscribe(
   user => console.log(`User updated: ${user.name}`),
   (prev, curr) => prev?.id === curr?.id,
 );
-
-subscriber.subscribe(source$);
 
 source$.next({ id: '1', name: 'Alice' }); // Logs: "User updated: Alice"
 source$.next({ id: '1', name: 'Alice Smith' }); // Skipped (same ID)
@@ -88,8 +105,9 @@ source$.next({ id: '1', name: 'Alice Smith' }); // Skipped (same ID)
 ```ts
 import { createSubscriber } from '@bemedev/subscriber';
 
-const subscriber = createSubscriber<number>(val => console.log(val));
-subscriber.subscribe(source$);
+const subscriber = createSubscriber(source$).subscribe(val =>
+  console.log(val),
+);
 
 // Pause notifications
 subscriber.close(); // state becomes 'paused'
@@ -99,6 +117,9 @@ subscriber.open(); // state becomes 'active'
 
 // Deactivate subscriber
 subscriber.unsubscribe(); // state becomes 'inactive'
+
+// Re-subscribe when inactive
+subscriber.reSubscribe(); // state becomes 'active'
 
 // Permanently dispose subscriber resources
 subscriber.dispose(); // state becomes 'disposed'
@@ -110,8 +131,9 @@ subscriber.dispose(); // state becomes 'disposed'
 import { createSubscriber } from '@bemedev/subscriber';
 
 function run() {
-  using subscriber = createSubscriber<number>(val => console.log(val));
-  subscriber.subscribe(source$);
+  using subscriber = createSubscriber(source$).subscribe(val =>
+    console.log(val),
+  );
   // subscriber automatically disposes when scope exits via Symbol.dispose
 }
 ```
@@ -120,32 +142,43 @@ function run() {
 
 ## API Reference
 
-### `createSubscriber(subscriber, equals?)`
+### `createSubscriber(subscribable)`
 
-Factory function to create a new `SubscriberClass` instance.
+Factory function to create a new `SubscriberBuilderClass` instance attached
+to a subscribable source.
 
-- **`subscriber`**: `Subscriber_F<T>` — Callback invoked when new values
-  pass equality check.
-- **`equals`**: `Equals_F<T>` _(optional)_ — Custom equality comparator.
-  Defaults to `normalEquals` (`a === b`).
+- **`subscribable`**: `Subscribable<T>` — Source subscribable object.
+- **Returns**: `SubscriberBuilderClass<T, T>`
 
-### `SubscriberClass<T>`
+### `SubscriberBuilderClass<T, R>`
 
-Main class representing subscriber node.
+Builder class used to chain selector transformations and create active
+subscribers.
 
-| Method / Property         | Type / Return                     | Description                                                                          |
-| ------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
-| `state`                   | `SubscriberState`                 | Returns current state (`'idle'`, `'active'`, `'paused'`, `'inactive'`, `'disposed'`) |
-| `equals`                  | `Equals_F<T>`                     | Returns equality comparator function                                                 |
-| `isNotInactive`           | `boolean`                         | `true` if state is neither `'disposed'` nor `'inactive'`                             |
-| `subscribe(subscribable)` | `Unsubscribable`                  | Subscribes to a `Subscribable` source                                                |
-| `close()`                 | `SubscriberState`                 | Pauses subscriber notifications (`'paused'`)                                         |
-| `open()`                  | `SubscriberState`                 | Resumes subscriber notifications (`'active'`)                                        |
-| `unsubscribe()`           | `SubscriberState`                 | Unsubscribes subscriber (`'inactive'`)                                               |
-| `dispose()`               | `SubscriberState`                 | Clean up subscriber references and set state to `'disposed'`                         |
-| `renew`                   | `SubscriberClass<T> \| undefined` | Spawns a new active subscriber instance                                              |
-| `[Symbol.dispose]()`      | `SubscriberState`                 | Standard synchronous disposal                                                        |
-| `[Symbol.asyncDispose]()` | `Promise<SubscriberState>`        | Standard asynchronous disposal                                                       |
+| Method / Property                | Type / Return                      | Description                                                                            |
+| -------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
+| `subscribable`                   | `Subscribable<T>`                  | Returns attached source subscribable object                                            |
+| `select(selector)`               | `SubscriberBuilderClass<T, RNext>` | Creates a new subscriber builder with a nested selector transformer                    |
+| `subscribe(subscriber, equals?)` | `SubscriberClass<T, R>`            | Subscribes callback to state updates with optional equality comparator and starts node |
+
+### `SubscriberClass<T, R>`
+
+Main class representing an active subscriber node.
+
+| Method / Property         | Type / Return                   | Description                                                                |
+| ------------------------- | ------------------------------- | -------------------------------------------------------------------------- |
+| `state`                   | `SubscriberState`               | Returns current state (`'active'`, `'paused'`, `'inactive'`, `'disposed'`) |
+| `equals`                  | `Equals_F<R>`                   | Returns equality comparator function                                       |
+| `selector`                | `Selector_F<T, R> \| undefined` | Returns selector function or `undefined`                                   |
+| `subscribable`            | `Subscribable<T> \| undefined`  | Returns source subscribable object or `undefined` if disposed              |
+| `isNotInactive`           | `boolean`                       | `true` if state is neither `'disposed'` nor `'inactive'`                   |
+| `close()`                 | `SubscriberState`               | Pauses subscriber notifications (`'paused'`)                               |
+| `open()`                  | `SubscriberState`               | Resumes subscriber notifications (`'active'`)                              |
+| `unsubscribe()`           | `SubscriberState`               | Unsubscribes subscriber (`'inactive'`)                                     |
+| `reSubscribe()`           | `SubscriberState`               | Re-subscribes to source subscribable if inactive (`'active'`)              |
+| `dispose()`               | `SubscriberState`               | Cleans up subscriber references and sets state to `'disposed'`             |
+| `[Symbol.dispose]()`      | `SubscriberState`               | Standard synchronous disposal                                              |
+| `[Symbol.asyncDispose]()` | `Promise<SubscriberState>`      | Standard asynchronous disposal                                             |
 
 <br/>
 
@@ -173,4 +206,4 @@ chlbri (bri_lvi@icloud.com)
 
 ## Links
 
-- [Documentation](https://github.com/chlbri/node-subscriber)
+- [Documentation](https://github.com/chlbri/node-subscriber/tree/main/packages/subscriber)

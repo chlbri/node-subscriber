@@ -15,10 +15,7 @@
         "close": true
       },
       "hide": true,
-      "runOptions": {
-        "runOn": "folderOpen",
-        "instanceLimit": 1
-      }
+      "runOptions": { "runOn": "folderOpen", "instanceLimit": 1 }
     },
     {
       "label": "pnpm:install",
@@ -36,10 +33,7 @@
       "detail": "Install deps",
       "hide": true,
       "dependsOn": "pull",
-      "runOptions": {
-        "runOn": "folderOpen",
-        "instanceLimit": 1
-      }
+      "runOptions": { "runOn": "folderOpen", "instanceLimit": 1 }
     },
     {
       "label": "pnpm:ci",
@@ -57,10 +51,7 @@
       "hide": true,
       "detail": "CI the package",
       "dependsOn": "pnpm:install",
-      "runOptions": {
-        "runOn": "folderOpen",
-        "instanceLimit": 1
-      }
+      "runOptions": { "runOn": "folderOpen", "instanceLimit": 1 }
     }
   ]
 }

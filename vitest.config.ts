@@ -1,9 +1,7 @@
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  server: {
-    host: '0.0.0.0',
-  },
+  server: { host: '0.0.0.0' },
 
   test: {
     passWithNoTests: true,

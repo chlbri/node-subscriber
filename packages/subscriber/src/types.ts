@@ -1,64 +1,128 @@
 import type { Fn } from '#bemedev/globals/types';
 
+/**
+ * An observer that handles next notifications.
+ *
+ * @template T - Type of data emitted by the source.
+ */
 export type NextObserver<T> = {
+  /**
+   * Optional flag indicating if observer is closed.
+   */
   closed?: boolean;
+  /**
+   * Callback handling next value emission.
+   *
+   * @param value - Emitted value of type `T`.
+   */
   next: (value: T) => void;
+  /**
+   * Callback handling error notification.
+   *
+   * @param err - Error payload.
+   */
   error?: (err: any) => void;
+  /**
+   * Callback handling completion notification.
+   */
   complete?: () => void;
 };
 
+/**
+ * An observer that handles error notifications.
+ *
+ * @template T - Type of data emitted by the source.
+ */
 export type ErrorObserver<T> = {
+  /**
+   * Optional flag indicating if observer is closed.
+   */
   closed?: boolean;
+  /**
+   * Callback handling next value emission.
+   *
+   * @param value - Emitted value of type `T`.
+   */
   next?: (value: T) => void;
+  /**
+   * Callback handling error notification.
+   *
+   * @param err - Error payload.
+   */
   error: (err: any) => void;
+  /**
+   * Callback handling completion notification.
+   */
   complete?: () => void;
 };
 
+/**
+ * An observer that handles completion notifications.
+ *
+ * @template T - Type of data emitted by the source.
+ */
 export type CompletionObserver<T> = {
+  /**
+   * Optional flag indicating if observer is closed.
+   */
   closed?: boolean;
+  /**
+   * Callback handling next value emission.
+   *
+   * @param value - Emitted value of type `T`.
+   */
   next?: (value: T) => void;
+  /**
+   * Callback handling error notification.
+   *
+   * @param err - Error payload.
+   */
   error?: (err: any) => void;
+  /**
+   * Callback handling completion notification.
+   */
   complete: () => void;
 };
 
+/**
+ * Union type of observer configurations requiring at least one notification handler.
+ *
+ * @template T - Type of data emitted by the source.
+ */
 export type PartialObserver<T> =
   | NextObserver<T>
   | ErrorObserver<T>
   | CompletionObserver<T>;
 
-export type Unsubscribable = { unsubscribe: Fn<[], void> };
+/**
+ * Represents a subscription handle that can be unsubscribed.
+ */
+export type Unsubscribable = {
+  /**
+   * Function to terminate the subscription.
+   */
+  unsubscribe: Fn<[], void>;
+};
 
 /**
  * An object interface that defines a set of callback functions a user can use to get
- * notified of any set of {@link Observable}
+ * notified of any set of observables.
  *
+ * @template T - Type of data emitted by the source.
  */
 export type Observer<T> = {
   /**
-   * A callback function that gets called by the producer during the subscription when
-   * the producer "has" the `value`. It won't be called if `error` or `complete` callback
-   * functions have been called, nor after the consumer has unsubscribed.
-   *
+   * Callback function called when the producer emits a value of type `T`.
    */
   next: Subscriber_F<T>;
 
   /**
-   * A callback function that gets called by the producer if and when it encountered a
-   * problem of any kind. The errored value will be provided through the `err` parameter.
-   * This callback can't be called more than one time, it can't be called if the
-   * `complete` callback function have been called previously, nor it can't be called if
-   * the consumer has unsubscribed.
-   *
+   * Callback function called when the producer encounters an error.
    */
   error: Fn<[err: any], void>;
 
   /**
-   * A callback function that gets called by the producer if and when it has no more
-   * values to provide (by calling `next` callback function). This means that no error
-   * has happened. This callback can't be called more than one time, it can't be called
-   * if the `error` callback function have been called previously, nor it can't be called
-   * if the consumer has unsubscribed.
-   *
+   * Callback function called when the producer completes.
    */
   complete: Fn<[], void>;
 };
@@ -67,7 +131,6 @@ export type Observer<T> = {
  * Represents the lifecycle state of a subscriber node.
  */
 export type SubscriberState =
-  | 'idle'
   | 'paused'
   | 'active'
   | 'disposed'
@@ -88,11 +151,35 @@ export type Subscriber_F<T> = Fn<[T], void>;
  * @param a - First value to compare.
  * @param b - Second value to compare.
  *
- * @returns `-- type {@linkcode boolean}` indicating whether `a` and `b` are equal.
+ * @returns type {@linkcode boolean} indicating whether `a` and `b` are equal.
  */
 export type Equals_F<T> = Fn<[T, T], boolean>;
 
+/**
+ * Function signature for a selector function mapping state of type `T` to selected value `R`.
+ *
+ * @template T - Type of input state.
+ * @template R - Type of selected value.
+ *
+ * @param val - Input state value of type `T`.
+ *
+ * @returns Selected value of type `R`.
+ */
+export type Selector_F<T, R = any> = Fn<[T], R>;
+
+/**
+ * Interface for subscribable objects emitting values of type `T`.
+ *
+ * @template T - Type of data emitted by the subscribable source.
+ */
 export type Subscribable<T> = {
+  /**
+   * Subscribes to emissions using an observer or next callback.
+   *
+   * @param observerOrNext - Optional partial observer or next callback function.
+   *
+   * @returns Subscription handle of type {@linkcode Unsubscribable}.
+   */
   subscribe: Fn<
     [observerOrNext?: PartialObserver<T> | Subscriber_F<T>],
     Unsubscribable
