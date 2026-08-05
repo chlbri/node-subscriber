@@ -42,6 +42,7 @@
     "typescript": "^7.0.2",
     "vite": "^8.2.0",
     "vite-plugin-solid": "^2.11.14",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.10"
   }
 }

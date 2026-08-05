@@ -6,7 +6,7 @@ import {
   type Subscriber,
 } from '@bemedev/subscriber';
 
-import { counter$, counterActions } from '../lib/store.ts';
+import { counter$, counterActions } from '#/lib/store';
 
 const StateChip = ({ state }: { state: SubscriberState }) => {
   const cls = {

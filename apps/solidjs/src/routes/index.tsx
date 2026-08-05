@@ -4,7 +4,7 @@ import {
 } from '@bemedev/subscriber';
 import { createFileRoute } from '@tanstack/solid-router';
 import { createEffect, createSignal, onCleanup } from 'solid-js';
-import { counter$, counterActions } from '../lib/store.ts';
+import { counter$, counterActions } from '#/lib/store';
 
 const StateChip = (props: { state: SubscriberState }) => {
   const cls = () =>
