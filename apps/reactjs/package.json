@@ -6,7 +6,9 @@
     "dev": "vite dev",
     "generate-routes": "tsr generate",
     "fmt": "oxfmt",
-    "lint": "oxlint --fix && pnpm run fmt",
+    "build": "vite build",
+    "pretest": "pnpm run build",
+    "lint": "oxlint --fix && pnpm run pretest",
     "_ci": "pnpm run lint && pnpm run pretest"
   },
   "dependencies": {
