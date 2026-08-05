@@ -2,6 +2,16 @@
   "name": "solidjs",
   "private": true,
   "type": "module",
+  "imports": {
+    "#/*": [
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*.js",
+      "./src/*.jsx",
+      "./src/*/index.ts",
+      "./src/*/index.tsx"
+    ]
+  },
   "scripts": {
     "dev": "vite dev",
     "generate-routes": "tsr generate",
