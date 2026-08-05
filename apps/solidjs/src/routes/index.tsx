@@ -1,11 +1,6 @@
+import { createSubscriber } from '@bemedev/subscriber';
 import { createFileRoute } from '@tanstack/solid-router';
-import {
-  createSignal,
-  createEffect,
-  onCleanup,
-  createMemo,
-} from 'solid-js';
-import { createSubscriber, prime } from '@bemedev/solid-subscriber';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 import { counter$, counterActions } from '../lib/store';
 
 export const Route = createFileRoute('/')({ component: HomePage });
@@ -39,25 +34,20 @@ function StateChip(props: { state: SubState }) {
 }
 
 function HomePage() {
-  // ── Primary subscriptions via createSubscriberSignal ────────────────────
-  const state = createSubscriber(counter$);
-  const doubled = createSubscriber(counter$, {
-    selector: s => s.count * 2,
-  });
-
-  const count = createMemo(() => state()?.count ?? 0);
-  const step = createMemo(() => state()?.step ?? 1);
-
   // ── Manual subscriber for lifecycle control ─────────────────────────────
   const [subState, setSubState] = createSignal<SubState>('active');
-  let manualSub: any = null;
+  const [count, setCount] = createSignal(0);
+  const [step, setStep] = createSignal(1);
+  const doubled = () => count() * 2;
 
-  const builder = prime.createSubscriber(counter$);
-  manualSub = builder.subscribe(() => {
-    setSubState(manualSub!.state as SubState);
-  }) as unknown as typeof manualSub;
+  const builder = createSubscriber(counter$);
+  const manualSub = builder.subscribe(({ count, step }) => {
+    setSubState(manualSub.state);
+    setCount(count);
+    setStep(step);
+  });
 
-  onCleanup(() => manualSub?.dispose());
+  onCleanup(() => manualSub.dispose());
 
   // ── Bump animation on count change ──────────────────────────────────────
   const [bump, setBump] = createSignal(false);
@@ -106,7 +96,7 @@ function HomePage() {
         <div class='divider' />
         <div class='stat-row'>
           <div class='stat'>
-            <div class='stat-label'>Count × 2</div>
+            <div class='stat-label'>Count * 2</div>
             <div class='stat-value'>{doubled() ?? 0}</div>
           </div>
           <div class='stat'>
@@ -147,7 +137,7 @@ function HomePage() {
             class='step-input'
             type='range'
             min={1}
-            max={10}
+            max={100}
             value={step()}
             onInput={e =>
               counterActions.setStep(Number(e.currentTarget.value))

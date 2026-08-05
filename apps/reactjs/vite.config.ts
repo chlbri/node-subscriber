@@ -6,6 +6,7 @@ import viteReact from '@vitejs/plugin-react';
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  server: { port: 3022 },
   plugins: [
     tanstackRouter({ target: 'react', autoCodeSplitting: true }),
     viteReact(),

@@ -3,19 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev",
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
     "pretest": "pnpm run build",
-    "test": "vitest run",
-    "test:only": "vitest run --no-coverage",
     "fmt": "oxfmt",
     "lint": "oxlint --fix && pnpm run fmt",
-    "_ci": "pnpm run lint && pnpm run test"
+    "_ci": "pnpm run lint && pnpm run pretest"
   },
   "dependencies": {
-    "@bemedev/solid-subscriber": "workspace:^",
+    "@bemedev/subscriber": "workspace:^",
     "@tanstack/solid-router": "latest",
     "rxjs": "^7.8.2",
     "solid-js": "^1.9.14"
@@ -32,11 +30,5 @@
     "vite": "^8.2.0",
     "vite-plugin-solid": "^2.11.14",
     "vitest": "^4.1.10"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss"
-    ]
   }
 }

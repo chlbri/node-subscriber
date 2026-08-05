@@ -1,12 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
-import { useSubscriber, prime } from '@bemedev/react-subscriber';
+import {
+  createSubscriber,
+  type SubscriberState,
+  type Subscriber,
+} from '@bemedev/subscriber';
 
 import { counter$, counterActions } from '#/lib/store';
 
 export const Route = createFileRoute('/')({ component: HomePage });
-
-type SubscriberState = 'active' | 'paused' | 'inactive' | 'disposed';
 
 function StateChip({ state }: { state: SubscriberState }) {
   const cls = {
@@ -33,23 +35,24 @@ function StateChip({ state }: { state: SubscriberState }) {
 }
 
 function HomePage() {
-  // ── Primary subscription via useSubscriber ──────────────────────────────
-  const state = useSubscriber(counter$);
-  const doubled = useSubscriber(counter$, { selector: s => s.count * 2 });
-
-  // ── Manual subscriber for lifecycle control ─────────────────────────────
-  const subRef = useRef<prime.Subscriber<typeof counter$.value> | null>(
-    null,
-  );
   const [subState, setSubState] = useState<SubscriberState>('active');
+  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
+  const doubled = count * 2;
+
+  const subRef = useRef<Subscriber<{
+    count: number;
+    step: number;
+  }> | null>(null);
 
   useEffect(() => {
-    const sub = prime.createSubscriber(counter$).subscribe(() => {
+    const sub = createSubscriber(counter$).subscribe(({ count, step }) => {
       setSubState(sub.state as SubscriberState);
+      setCount(count);
+      setStep(step);
     });
-    subRef.current = sub as unknown as prime.Subscriber<
-      typeof counter$.value
-    >;
+    subRef.current = sub;
+
     setSubState(sub.state as SubscriberState);
     return () => {
       sub.dispose();
@@ -58,18 +61,15 @@ function HomePage() {
 
   // Bump animation
   const [bump, setBump] = useState(false);
-  const prevCount = useRef(state?.count);
+  const prevCount = useRef(count);
   useEffect(() => {
-    if (state?.count !== prevCount.current) {
+    if (count !== prevCount.current) {
       setBump(true);
-      prevCount.current = state?.count;
+      prevCount.current = count;
       const t = setTimeout(() => setBump(false), 260);
       return () => clearTimeout(t);
     }
-  }, [state?.count]);
-
-  const count = state?.count ?? 0;
-  const step = state?.step ?? 1;
+  }, [count]);
 
   const isActive = subState === 'active';
   const isPaused = subState === 'paused';
@@ -144,7 +144,7 @@ function HomePage() {
             className='step-input'
             type='range'
             min={1}
-            max={10}
+            max={100}
             value={step}
             onChange={e => counterActions.setStep(Number(e.target.value))}
           />

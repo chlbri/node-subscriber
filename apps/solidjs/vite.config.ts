@@ -6,6 +6,7 @@ import solidPlugin from 'vite-plugin-solid';
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
+  server: { port: 3021 },
   plugins: [
     tanstackRouter({ target: 'solid', autoCodeSplitting: true }),
     solidPlugin(),

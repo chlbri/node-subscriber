@@ -6,20 +6,17 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev",
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
-    "test:only": "vitest run --no-coverage",
     "pretest": "pnpm run build",
     "fmt": "oxfmt",
     "lint": "oxlint --fix && pnpm run fmt",
-    "_ci": "pnpm run lint && pnpm run test"
+    "_ci": "pnpm run lint && pnpm run pretest"
   },
   "dependencies": {
-    "@bemedev/react-subscriber": "workspace:^",
-    "@bemedev/react-sync": "^0.1.1",
+    "@bemedev/subscriber": "workspace:^",
     "@tanstack/react-router": "latest",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -40,11 +37,5 @@
     "typescript": "^7.0.2",
     "vite": "^8.2.0",
     "vitest": "^4.1.10"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss"
-    ]
   }
 }

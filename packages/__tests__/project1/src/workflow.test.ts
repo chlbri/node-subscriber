@@ -1,4 +1,8 @@
-import { createSubscriber, normalEquals } from '@bemedev/subscriber';
+import {
+  createSubscriber,
+  defaultSelector,
+  normalEquals,
+} from '@bemedev/subscriber';
 import { Subject } from 'rxjs';
 import { typeMock } from './fixtures';
 
@@ -10,7 +14,7 @@ describe('RxJS workflow Tests', () => {
   const subject$ = new Subject<number>();
 
   const builder1 = createSubscriber(subject$);
-  const builder2 = createSubscriber(subject$);
+  const builder2 = createSubscriber(subject$).select(defaultSelector);
   const builder3 = createSubscriber(subject$);
 
   const sub1 = builder1.subscribe(typeMock(fn1, val => val * 2));
@@ -192,8 +196,8 @@ describe('RxJS workflow Tests', () => {
     subject$.next(4);
   });
 
-  test('#45 => fn1 was called 3 times', () => {
-    expect(fn1).toHaveBeenCalledTimes(3);
+  test('#45 => fn1 was called 4 times', () => {
+    expect(fn1).toHaveBeenCalledTimes(4);
   });
 
   test('#46 => fn1 last returned 8', () => {
@@ -214,8 +218,8 @@ describe('RxJS workflow Tests', () => {
     subject$.next(5);
   });
 
-  test('#51 => fn1 call count remains 3', () => {
-    expect(fn1).toHaveBeenCalledTimes(3);
+  test('#51 => fn1 call count remains 4', () => {
+    expect(fn1).toHaveBeenCalledTimes(4);
   });
 
   test('#52 => open inactive sub1', sub1.open);
@@ -230,8 +234,8 @@ describe('RxJS workflow Tests', () => {
     expect(sub1.state).toBe('inactive');
   });
 
-  test('#56 => fn1 call count remains 3', () => {
-    expect(fn1).toHaveBeenCalledTimes(3);
+  test('#56 => fn1 call count remains 4', () => {
+    expect(fn1).toHaveBeenCalledTimes(4);
   });
 
   test('#57 => reSubscribe sub1', sub1.reSubscribe);
@@ -244,98 +248,101 @@ describe('RxJS workflow Tests', () => {
     subject$.next(6);
   });
 
-  test('#60 => fn1 was called 4 times', () => {
-    expect(fn1).toHaveBeenCalledTimes(4);
+  test('#60 => close  sub1', sub1.close);
+  test('#61 => open  sub1', sub1.open);
+
+  test('#62 => fn1 was called 5 times', () => {
+    expect(fn1).toHaveBeenCalledTimes(5);
   });
 
-  test('#61 => fn1 last returned 12', () => {
+  test('#63 => fn1 last returned 12', () => {
     expect(fn1).toHaveLastReturnedWith(12);
   });
 
-  test('#62 => fn2 was called 6 times', () => {
+  test('#64 => fn2 was called 6 times', () => {
     expect(fn2).toHaveBeenCalledTimes(6);
   });
 
-  test('#63 => fn2 last returned 16', () => {
+  test('#65 => fn2 last returned 16', () => {
     expect(fn2).toHaveLastReturnedWith(16);
   });
 
-  test('#64 => unsubscribe sub1', sub1.unsubscribe);
-  test('#65 => dispose sub1', sub1.dispose);
+  test('#66 => unsubscribe sub1', sub1.unsubscribe);
+  test('#67 => dispose sub1', sub1.dispose);
 
-  test('#66 => sub1 state is disposed', () => {
+  test('#68 => sub1 state is disposed', () => {
     expect(sub1.state).toBe('disposed');
   });
 
-  test('#67 => reSubscribe disposed sub1 returns disposed', () => {
+  test('#69 => reSubscribe disposed sub1 returns disposed', () => {
     expect(sub1.reSubscribe()).toBe('disposed');
   });
 
-  test('#68 => sub1 subscribable is undefined', () => {
+  test('#70 => sub1 subscribable is undefined', () => {
     expect(sub1.subscribable).toBeUndefined();
   });
 
-  test('#69 => sub1 isNotInactive is false', () => {
+  test('#71 => sub1 isNotInactive is false', () => {
     expect(sub1.isNotInactive).toBe(false);
   });
 
-  test('#70 => sub1 equals is undefined', () => {
+  test('#72 => sub1 equals is undefined', () => {
     expect(sub1.equals).toBeUndefined();
   });
 
-  test('#71 => dispose sub2', sub2[Symbol.dispose]);
+  test('#73 => dispose sub2', sub2[Symbol.dispose]);
 
-  test('#72 => sub2 state is disposed', () => {
+  test('#74 => sub2 state is disposed', () => {
     expect(sub2.state).toBe('disposed');
   });
 
-  test('#73 => sub2 subscribable is undefined', () => {
+  test('#75 => sub2 subscribable is undefined', () => {
     expect(sub2.subscribable).toBeUndefined();
   });
 
-  test('#74 => sub2 isNotInactive is false', () => {
+  test('#76 => sub2 isNotInactive is false', () => {
     expect(sub2.isNotInactive).toBe(false);
   });
 
-  test('#75 => sub2 equals is undefined', () => {
+  test('#77 => sub2 equals is undefined', () => {
     expect(sub2.equals).toBeUndefined();
   });
 
-  test('#76 => dispose sub3', sub3[Symbol.asyncDispose]);
+  test('#78 => dispose sub3', sub3[Symbol.asyncDispose]);
 
-  test('#77 => sub3 state is disposed', () => {
+  test('#79 => sub3 state is disposed', () => {
     expect(sub3.state).toBe('disposed');
   });
 
-  test('#78 => sub3 subscribable is undefined', () => {
+  test('#80 => sub3 subscribable is undefined', () => {
     expect(sub3.subscribable).toBeUndefined();
   });
 
-  test('#79 => sub3 isNotInactive is false', () => {
+  test('#81 => sub3 isNotInactive is false', () => {
     expect(sub3.isNotInactive).toBe(false);
   });
 
-  test('#80 => sub3 equals is undefined', () => {
+  test('#82 => sub3 equals is undefined', () => {
     expect(sub3.equals).toBeUndefined();
   });
 
-  test('#81 => emit value 7 after dispose', () => {
+  test('#83 => emit value 7 after dispose', () => {
     subject$.next(7);
   });
 
-  test('#82 => fn1 call count remains 4', () => {
-    expect(fn1).toHaveBeenCalledTimes(4);
+  test('#84 => fn1 call count remains 5', () => {
+    expect(fn1).toHaveBeenCalledTimes(5);
   });
 
-  test('#83 => fn2 call count remains 6', () => {
+  test('#85 => fn2 call count remains 6', () => {
     expect(fn2).toHaveBeenCalledTimes(6);
   });
 
-  test('#84 => fn3 call count remains 1', () => {
+  test('#86 => fn3 call count remains 1', () => {
     expect(fn3).toHaveBeenCalledTimes(1);
   });
 
-  test('#85 => subject$ is still open', () => {
+  test('#87 => subject$ is still open', () => {
     expect(subject$.closed).toBe(false);
   });
 });

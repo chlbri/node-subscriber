@@ -139,7 +139,7 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
    */
   constructor(
     private __subscribable: Subscribable<T>,
-    private __subscriber?: Subscriber_F<T>,
+    private __subscriber: Subscriber_F<T>,
     private __selector?: Selector_F<T, R>,
     private __equals: Equals_F<R> = normalEquals as unknown as Equals_F<R>,
   ) {
@@ -178,14 +178,14 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
             this.__selector(this.__currenValue),
           )
         : (this.__equals as unknown as Equals_F<T>)(
-            this.__previousValue!,
+            this.__previousValue,
             this.__currenValue,
           )
       : false;
 
     if (_equals) return;
     this.__firstTime = false;
-    return this.__subscriber?.(this.__currenValue);
+    return this.__subscriber(this.__currenValue);
   };
 
   /**
@@ -212,7 +212,10 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
    * @returns type {@linkcode SubscriberState} updated state.
    */
   close = (): SubscriberState => {
-    if (this.isNotInactive) return (this.__state = 'paused');
+    if (this.isNotInactive) {
+      this.__previousValue = this.__currenValue;
+      return (this.__state = 'paused');
+    }
     return this.__state;
   };
 
@@ -222,7 +225,12 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
    * @returns type {@linkcode SubscriberState} updated state.
    */
   open = (): SubscriberState => {
-    if (this.__state === 'paused') return (this.__state = 'active');
+    if (this.__state === 'paused') {
+      if (this.__previousValue !== this.__currenValue) {
+        this.__subscriber(this.__currenValue);
+      }
+      return (this.__state = 'active');
+    }
     return this.__state;
   };
 
@@ -246,9 +254,9 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
    */
   reSubscribe = (): SubscriberState => {
     if (this.state !== 'inactive') return this.__state;
-    this.__subscription?.unsubscribe();
     this.__subscription = this.__subscribable.subscribe(this.__fn);
     this.__state = 'active';
+    this.__firstTime = true;
     return this.__state;
   };
 
