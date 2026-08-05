@@ -77,15 +77,15 @@ export const Route = createFileRoute('/')({
           </div>
           <h1>Reactive Subscriber</h1>
           <p>
-            Live demo using{' '}
+            {'Live demo using '}
             <strong style={{ color: 'var(--accent)' }}>
               createSubscriberSignal
-            </strong>{' '}
-            + RxJS BehaviorSubject via TanStack Router
+            </strong>
+            {' + RxJS BehaviorSubject via TanStack Router'}
           </p>
         </header>
 
-        {/* ── Main counter ── */}
+        {/* #region ── Main counter ── */}
         <div class='card'>
           <div class='card-title'>Live Value</div>
           <div class='counter-display'>
@@ -106,6 +106,7 @@ export const Route = createFileRoute('/')({
             </div>
           </div>
         </div>
+        {/* #endregion */}
 
         {/* ── Counter controls ── */}
         <div class='card'>
