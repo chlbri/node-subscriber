@@ -2,16 +2,6 @@
   "name": "solidjs",
   "private": true,
   "type": "module",
-  "imports": {
-    "#/*": [
-      "./src/*.ts",
-      "./src/*.tsx",
-      "./src/*.js",
-      "./src/*.jsx",
-      "./src/*/index.ts",
-      "./src/*/index.tsx"
-    ]
-  },
   "scripts": {
     "dev": "vite dev",
     "prebuild": "pnpm --filter @bemedev/subscriber run build",
@@ -42,7 +32,6 @@
     "typescript": "^7.0.2",
     "vite": "^8.2.0",
     "vite-plugin-solid": "^2.11.14",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.10"
   }
 }
