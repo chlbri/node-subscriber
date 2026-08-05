@@ -25,7 +25,7 @@
   "devDependencies": {
     "@bemedev/dev-utils": "^1.1.1",
     "@solidjs/testing-library": "^0.8.10",
-    "@tanstack/solid-router-devtools": "1.167.0",
+    "@tanstack/solid-router-devtools": "1.167.1",
     "jsdom": "^30.0.1",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",
