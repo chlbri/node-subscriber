@@ -58,7 +58,7 @@
     "@types/node": "^26.1.2",
     "rolldown": "^1.2.2",
     "size-limit": "^13.0.3",
-    "typescript": "^7.0.2",
+    "typescript": "7.0.2",
     "vitest": "4.1.10"
   },
   "size-limit": [

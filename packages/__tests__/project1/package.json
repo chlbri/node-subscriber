@@ -14,6 +14,6 @@
   "devDependencies": {
     "@bemedev/subscriber": "workspace:^",
     "rxjs": "^7.8.2",
-    "typescript": "^7.0.2"
+    "typescript": "7.0.2"
   }
 }

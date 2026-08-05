@@ -4,13 +4,23 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  typescript: 6.0.3
+  '@bemedev/rolldown-config>typescript': 6.0.3
+  '@bemedev/dev-utils>typescript': 6.0.3
+  rolldown-plugin-dts>typescript: 6.0.3
+  rollup-plugin-tsconfig-paths>typescript: 6.0.3
+  typescript-paths>typescript: 6.0.3
+
+packageExtensionsChecksum: sha256-mOe3necoB4IDhbCeqj6ROm5RprfFN7wWgK/N6eV3czY=
+
 importers:
 
   .:
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.1.1
-        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
+        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(typescript@7.0.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
       '@size-limit/file':
         specifier: ^13.0.3
         version: 13.0.3(size-limit@13.0.3)
@@ -60,7 +70,7 @@ importers:
         specifier: ^4.23.5
         version: 4.23.5
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
       vitest:
         specifier: ^4.1.10
@@ -98,7 +108,7 @@ importers:
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.1.1
-        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
+        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(typescript@7.0.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
       '@tanstack/router-cli':
         specifier: ^1.167.22
         version: 1.167.22(supports-color@10.2.2)
@@ -130,7 +140,7 @@ importers:
         specifier: ^1.77.0
         version: 1.77.0
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
       vite:
         specifier: ^8.2.0
@@ -165,7 +175,7 @@ importers:
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.1.1
-        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
+        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(typescript@7.0.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
       '@solidjs/testing-library':
         specifier: ^0.8.10
         version: 0.8.10(solid-js@1.9.14)
@@ -182,7 +192,7 @@ importers:
         specifier: ^1.77.0
         version: 1.77.0
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
       vite:
         specifier: ^8.2.0
@@ -203,14 +213,14 @@ importers:
         specifier: ^7.8.2
         version: 7.8.2
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
 
   packages/subscriber:
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.1.1
-        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
+        version: 1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(typescript@7.0.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)
       '@size-limit/file':
         specifier: ^13.0.3
         version: 13.0.3(size-limit@13.0.3)
@@ -224,7 +234,7 @@ importers:
         specifier: ^13.0.3
         version: 13.0.3
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
       vitest:
         specifier: 4.1.10
@@ -345,6 +355,7 @@ packages:
     hasBin: true
     peerDependencies:
       rolldown: ^1.2.0
+      typescript: 6.0.3
       vitest: 4.1.10
 
   '@blakeembrey/deque@1.0.5':
@@ -4835,7 +4846,7 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@bemedev/dev-utils@1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)':
+  '@bemedev/dev-utils@1.1.1(rolldown@1.2.2)(rollup@4.62.4)(supports-color@10.2.2)(typescript@7.0.2)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))(vitest@4.1.10)':
     dependencies:
       '@typescript/typescript6': 6.0.2
       cmd-ts: 0.15.0(supports-color@10.2.2)
@@ -4848,6 +4859,7 @@ snapshots:
       shelljs: 0.10.0
       sort-keys: 6.0.1
       tsc-alias: 1.9.1
+      typescript: 7.0.2
       vitest: 4.1.10(@types/node@26.1.2)(@vitest/coverage-v8@4.1.10)(@vitest/ui@4.1.10)(jsdom@30.0.1)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.1)(tsx@4.23.5))
     transitivePeerDependencies:
       - rollup
