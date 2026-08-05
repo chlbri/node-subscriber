@@ -5,6 +5,7 @@ packages:
   - 'apps/solidjs'
 
 allowBuilds:
+  '@parcel/watcher': true
   esbuild: true
   lightningcss: true
 
