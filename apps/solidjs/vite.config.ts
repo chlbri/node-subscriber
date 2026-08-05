@@ -7,7 +7,6 @@ import viteSolid from 'vite-plugin-solid';
 export default defineConfig({
   server: { port: 3021 },
   resolve: { tsconfigPaths: true },
-  ssr: { noExternal: ['@bemedev/subscriber'] },
   plugins: [
     tanstackStart({}),
     nitro(),
