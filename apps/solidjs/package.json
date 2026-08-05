@@ -4,11 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "prebuild": "pnpm --filter @bemedev/subscriber run build",
     "generate-routes": "tsr generate",
-    "build": "vite build",
-    "preview": "vite preview",
-    "pretest": "pnpm run build",
     "fmt": "oxfmt",
     "lint": "oxlint --fix && pnpm run fmt",
     "_ci": "pnpm run lint && pnpm run pretest"
