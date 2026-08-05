@@ -33,7 +33,7 @@
   },
   "scripts": {
     "pnpm:devPreinstall": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('./package.json')); const version=require('child_process').execSync('pnpm -v').toString().trim(); pkg.packageManager='pnpm@' + version; fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\\n');\"",
-    "build": "pnpm -r --sort run build",
+    "build": "pnpm  --sequential -r --sort run build",
     "config": "pnpm i",
     "_ci": "pnpm install && pnpm -r --sort run _ci",
     "ci": "CI=$(date +%s) && pnpm run _ci && echo \"\n✅ CI takes $(($(date +%s) - CI))s\n\"",
