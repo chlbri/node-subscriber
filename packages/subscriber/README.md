@@ -175,9 +175,9 @@ subscribers.
 | -------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
 | `subscribable`                   | `Subscribable<T>`                  | Returns attached source subscribable object                                            |
 | `select(selector)`               | `SubscriberBuilderClass<T, RNext>` | Creates a new subscriber builder with a nested selector transformer                    |
-| `subscribe(subscriber, equals?)` | `SubscriberClass<T, R>`            | Subscribes callback to state updates with optional equality comparator and starts node |
+| `subscribe(subscriber, equals?)` | `Subscriber<T, R>`                 | Subscribes callback to state updates with optional equality comparator and starts node |
 
-### `SubscriberClass<T, R>`
+### `Subscriber<T, R>`
 
 Main class representing an active subscriber node.
 

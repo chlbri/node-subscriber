@@ -6,6 +6,21 @@
 <details>
 <summary>
 
+## **[0.4.0] - 06/08/2026** => _11:32_
+
+</summary>
+
+- **Refactor**: Renamed internal implementation class from `SubscriberClass` to `Subscriber` and exported `Subscriber` class directly
+- **Dependencies**: Updated `rolldown` to `1.2.3`
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.3.0] - 04/08/2026** => _23:07_
 
 </summary>

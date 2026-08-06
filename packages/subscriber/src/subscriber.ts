@@ -66,13 +66,13 @@ class SubscriberBuilderClass<T, R = T> {
    * @param subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
    * @param equals - Optional equality comparator function of type {@linkcode Equals_F}.
    *
-   * @returns Active instance of class {@linkcode SubscriberClass} with state set to `'active'`.
+   * @returns Active instance of class {@linkcode Subscriber} with state set to `'active'`.
    */
   subscribe(
     subscriber: Subscriber_F<T>,
     equals?: Equals_F<R>,
-  ): SubscriberClass<T, R> {
-    return new SubscriberClass<T, R>(
+  ): Subscriber<T, R> {
+    return new Subscriber<T, R>(
       this.__subscribable,
       subscriber,
       this.__selector,
@@ -88,7 +88,7 @@ class SubscriberBuilderClass<T, R = T> {
  * @template T - Type of data emitted by the source subscribable.
  * @template R - Type of selected value derived from state, defaulting to `T`.
  */
-class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
+export class Subscriber<T, R = T> implements Disposable, AsyncDisposable {
   /**
    * Current lifecycle state of the subscriber.
    */
@@ -128,7 +128,7 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
   private __currenValue!: T;
 
   /**
-   * Creates an active instance of class {@linkcode SubscriberClass}.
+   * Creates an active instance of class {@linkcode Subscriber}.
    *
    * @param __subscribable - Source subscribable of type {@linkcode Subscribable}.
    * @param __subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
@@ -309,14 +309,6 @@ class SubscriberClass<T, R = T> implements Disposable, AsyncDisposable {
  * @template {unknown} R - The result type of the operator, defaults to `T`.
  */
 export type SubscriberBuilder<T, R = T> = SubscriberBuilderClass<T, R>;
-
-/**
- * Type alias for class {@linkcode SubscriberClass}.
- *
- * @template {unknown} T - The type of the stream to subscribe to.
- * @template {unknown} R - The result type of the operator, defaults to `T`.
- */
-export type Subscriber<T, R = T> = SubscriberClass<T, R>;
 
 /**
  * Factory function signature for creating subscriber builder instances of class {@linkcode SubscriberBuilderClass}.
