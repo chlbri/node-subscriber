@@ -23,9 +23,7 @@ describe('TESTS', () => {
   });
 
   describe.each(CASES)('$2', (fn, name) => {
-    test(`#01 => ${name} is defined`, () => {
-      expect(fn).toBeDefined();
-    });
+    test(`#01 => ${name} is defined`, () => expect(fn).toBeDefined());
 
     test(`#02 => ${name} is function`, () => {
       expect(fn).toBeInstanceOf(Function);

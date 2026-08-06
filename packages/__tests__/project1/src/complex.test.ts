@@ -56,8 +56,9 @@ describe('Select parent of multiple subscribers Tests', () => {
     expect(fnParent2).toHaveBeenCalledTimes(1);
   });
 
-  test('#08 => fP2 last returned "FRUIT"', () =>
-    expect(fnParent2).toHaveLastReturnedWith('FRUIT'));
+  test('#08 => fP2 last returned "FRUIT"', () => {
+    expect(fnParent2).toHaveLastReturnedWith('FRUIT');
+  });
 
   test('#09 => fChild was called 1 time', () => {
     expect(fnChild).toHaveBeenCalledTimes(1);
@@ -99,8 +100,9 @@ describe('Select parent of multiple subscribers Tests', () => {
     expect(fnParent2).toHaveBeenCalledTimes(2);
   });
 
-  test('#19 => fP2 last returned "VEGGIE"', () =>
-    expect(fnParent2).toHaveLastReturnedWith('VEGGIE'));
+  test('#19 => fP2 last returned "VEGGIE"', () => {
+    expect(fnParent2).toHaveLastReturnedWith('VEGGIE');
+  });
 
   test('#20 => fChild was called 2 times', () => {
     expect(fnChild).toHaveBeenCalledTimes(2);
@@ -124,8 +126,9 @@ describe('Select parent of multiple subscribers Tests', () => {
     expect(fnParent2).toHaveBeenCalledTimes(3);
   });
 
-  test('#26 => fP2 last returned "DRINK"', () =>
-    expect(fnParent2).toHaveLastReturnedWith('DRINK'));
+  test('#26 => fP2 last returned "DRINK"', () => {
+    expect(fnParent2).toHaveLastReturnedWith('DRINK');
+  });
 
   test('#27 => fChild was called 3 times', () => {
     expect(fnChild).toHaveBeenCalledTimes(3);

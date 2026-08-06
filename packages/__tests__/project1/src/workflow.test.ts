@@ -89,9 +89,7 @@ describe('RxJS workflow Tests', () => {
     expect((sub1 as any).renew).toBeUndefined();
   });
 
-  test('#16 => emit value 1 on subject$', () => {
-    subject$.next(1);
-  });
+  test('#16 => emit value 1 on subject$', () => subject$.next(1));
 
   test('#17 => fn1 was called 1 time', () => {
     expect(fn1).toHaveBeenCalledTimes(1);
@@ -117,9 +115,7 @@ describe('RxJS workflow Tests', () => {
     expect(fn3).toHaveLastReturnedWith(101);
   });
 
-  test('#23 => emit value 1 again on subject$', () => {
-    subject$.next(1);
-  });
+  test('#23 => emit value 1 again on subject$', () => subject$.next(1));
 
   test('#24 => fn1 call count remains 1', () => {
     expect(fn1).toHaveBeenCalledTimes(1);
@@ -133,9 +129,7 @@ describe('RxJS workflow Tests', () => {
     expect(fn3).toHaveBeenCalledTimes(1);
   });
 
-  test('#27 => emit value 2 on subject$', () => {
-    subject$.next(2);
-  });
+  test('#27 => emit value 2 on subject$', () => subject$.next(2));
 
   test('#28 => fn1 was called 2 times', () => {
     expect(fn1).toHaveBeenCalledTimes(2);
@@ -173,9 +167,7 @@ describe('RxJS workflow Tests', () => {
     expect(sub1.state).toBe('paused');
   });
 
-  test('#38 => emit value 3 while paused', () => {
-    subject$.next(3);
-  });
+  test('#38 => emit value 3 while paused', () => subject$.next(3));
 
   test('#39 => fn1 call count remains 2', () => {
     expect(fn1).toHaveBeenCalledTimes(2);
@@ -191,10 +183,7 @@ describe('RxJS workflow Tests', () => {
 
   test('#42 => open sub1', sub1.open);
   test('#43 => open sub1 again', sub1.open);
-
-  test('#44 => emit value 4 after open', () => {
-    subject$.next(4);
-  });
+  test('#44 => emit value 4 after open', () => subject$.next(4));
 
   test('#45 => fn1 was called 4 times', () => {
     expect(fn1).toHaveBeenCalledTimes(4);
@@ -214,9 +203,7 @@ describe('RxJS workflow Tests', () => {
     expect(sub1.state).toBe('inactive');
   });
 
-  test('#50 => emit value 5 after unsubscribe', () => {
-    subject$.next(5);
-  });
+  test('#50 => emit value 5 after unsubscribe', () => subject$.next(5));
 
   test('#51 => fn1 call count remains 4', () => {
     expect(fn1).toHaveBeenCalledTimes(4);
@@ -244,10 +231,7 @@ describe('RxJS workflow Tests', () => {
     expect(sub1.state).toBe('active');
   });
 
-  test('#59 => emit value 6 after reSubscribe', () => {
-    subject$.next(6);
-  });
-
+  test('#59 => emit value 6 after reSubscribe', () => subject$.next(6));
   test('#60 => close  sub1', sub1.close);
   test('#61 => open  sub1', sub1.open);
 
@@ -326,9 +310,7 @@ describe('RxJS workflow Tests', () => {
     expect(sub3.equals).toBeUndefined();
   });
 
-  test('#83 => emit value 7 after dispose', () => {
-    subject$.next(7);
-  });
+  test('#83 => emit value 7 after dispose', () => subject$.next(7));
 
   test('#84 => fn1 call count remains 5', () => {
     expect(fn1).toHaveBeenCalledTimes(5);

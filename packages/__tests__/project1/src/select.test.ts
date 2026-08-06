@@ -133,9 +133,7 @@ describe('Select options Tests', () => {
     expect(fn2).toHaveLastReturnedWith(400);
   });
 
-  test('#23 => emit number 1', () => {
-    subject3$.next(1);
-  });
+  test('#23 => emit number 1', () => subject3$.next(1));
 
   test('#24 => fn3 was called 1 time', () => {
     expect(fn3).toHaveBeenCalledTimes(1);
@@ -145,9 +143,7 @@ describe('Select options Tests', () => {
     expect(fn3).toHaveLastReturnedWith(6);
   });
 
-  test('#26 => emit number 3 with same parity', () => {
-    subject3$.next(3);
-  });
+  test('#26 => emit number 3 with same parity', () => subject3$.next(3));
 
   test('#27 => fn3 call count remains 1', () => {
     expect(fn3).toHaveBeenCalledTimes(1);
