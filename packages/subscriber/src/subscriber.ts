@@ -15,9 +15,9 @@ import type {
  * @template T - Type of data emitted by the source of type {@linkcode Subscribable}.
  * @template R - Type of selected value derived from state, defaulting to `T`.
  */
-class SubscriberBuilderClass<T, R = T> {
+export class SubscriberBuilder<T, R = T> {
   /**
-   * Creates an instance of class {@linkcode SubscriberBuilderClass}.
+   * Creates an instance of class {@linkcode SubscriberBuilder}.
    *
    * @param __subscribable - Source subscribable of type {@linkcode Subscribable}.
    * @param __selector - Optional selector function of type {@linkcode Selector_F}.
@@ -43,11 +43,11 @@ class SubscriberBuilderClass<T, R = T> {
    *
    * @param selector - Selector function of type {@linkcode Selector_F} mapping current selected value of type `R` to `RNext`.
    *
-   * @returns A new instance of class {@linkcode SubscriberBuilderClass} for type `RNext`.
+   * @returns A new instance of class {@linkcode SubscriberBuilder} for type `RNext`.
    */
   select<RNext>(
     selector: Selector_F<R, RNext>,
-  ): SubscriberBuilderClass<T, RNext> {
+  ): SubscriberBuilder<T, RNext> {
     const currentSelector = this.__selector;
 
     const combinedSelector = (
@@ -56,7 +56,7 @@ class SubscriberBuilderClass<T, R = T> {
         : selector
     ) as Selector_F<T, RNext>;
 
-    return new SubscriberBuilderClass<T, RNext>(
+    return new SubscriberBuilder<T, RNext>(
       this.__subscribable,
       combinedSelector,
     );
@@ -68,13 +68,13 @@ class SubscriberBuilderClass<T, R = T> {
    * @param subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
    * @param equals - Optional equality comparator function of type {@linkcode Equals_F}.
    *
-   * @returns Active instance of class {@linkcode SubscriberClass} with state set to `'active'`.
+   * @returns Active instance of class {@linkcode Subscriber} with state set to `'active'`.
    */
   subscribe(
     subscriber: Subscriber_F<T>,
     equals?: Equals_F<R>,
   ): Subscriber<T, R> {
-    return new SubscriberClass<T, R>(
+    return new Subscriber<T, R>(
       this.__subscribable,
       subscriber,
       this.__selector,
@@ -92,14 +92,14 @@ class SubscriberBuilderClass<T, R = T> {
  * @template T - Type of data emitted by the source of type {@linkcode Subscribable}.
  * @template R - Type of selected value derived from state, defaulting to `T`.
  */
-class SubscriberClass<T, R = T> extends SubscriberBaseClass<T, R> {
+export class Subscriber<T, R = T> extends SubscriberBaseClass<T, R> {
   /**
    * Active subscription handle connected to the source of type {@linkcode Subscribable}.
    */
   private __subscription?: Unsubscribable;
 
   /**
-   * Creates an active instance of class {@linkcode SubscriberClass}.
+   * Creates an active instance of class {@linkcode Subscriber}.
    *
    * @param __subscribable - Source subscribable of type {@linkcode Subscribable}.
    * @param subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
@@ -172,43 +172,27 @@ class SubscriberClass<T, R = T> extends SubscriberBaseClass<T, R> {
 }
 
 /**
- * Type alias for class {@linkcode SubscriberClass}.
- *
- * @template T - The type of the stream to subscribe to.
- * @template R - The result type of the operator, defaults to `T`.
- */
-export type Subscriber<T, R = T> = SubscriberClass<T, R>;
-
-/**
- * Type alias for class {@linkcode SubscriberBuilderClass}.
- *
- * @template T - The type of the stream to subscribe to.
- * @template R - The result type of the operator, defaults to `T`.
- */
-export type SubscriberBuilder<T, R = T> = SubscriberBuilderClass<T, R>;
-
-/**
- * Factory function signature for creating subscriber builder instances of class {@linkcode SubscriberBuilderClass}.
+ * Factory function signature for creating subscriber builder instances of class {@linkcode SubscriberBuilder}.
  *
  * @template T - Data type of subscriber state.
  *
  * @param subscribable - Source subscribable of type {@linkcode Subscribable}.
  *
- * @returns A new instance of class {@linkcode SubscriberBuilderClass}.
+ * @returns A new instance of class {@linkcode SubscriberBuilder}.
  */
 export type CreateSubscriber_F = <T>(
   subscribable: Subscribable<T>,
-) => SubscriberBuilderClass<T, T>;
+) => SubscriberBuilder<T, T>;
 
 /**
- * Creates a new instance of class {@linkcode SubscriberBuilderClass}.
+ * Creates a new instance of class {@linkcode SubscriberBuilder}.
  *
  * @template T - Data type of subscriber state.
  *
  * @param subscribable - Source subscribable of type {@linkcode Subscribable}.
  *
- * @returns A new instance of class {@linkcode SubscriberBuilderClass}.
+ * @returns A new instance of class {@linkcode SubscriberBuilder}.
  */
 export const createSubscriber: CreateSubscriber_F = subscribable => {
-  return new SubscriberBuilderClass(subscribable);
+  return new SubscriberBuilder(subscribable);
 };

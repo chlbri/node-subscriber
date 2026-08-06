@@ -6,6 +6,21 @@
 <details>
 <summary>
 
+## **[0.6.0] - 06/08/2026** => _16:25_
+
+</summary>
+
+- **Refactor**: Exported `ManagedSubscriber`, `Subscriber`, and `SubscriberBuilder` classes directly instead of using internal `...Class` names and separate type aliases
+- **Fixes**: Corrected function name spelling to `createManagedSubscriber` (aliased `createManagedSubcriber` for backward compatibility)
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.5.0] - 06/08/2026** => _15:10_
 
 </summary>

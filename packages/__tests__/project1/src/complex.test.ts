@@ -1,4 +1,8 @@
-import { createSubscriber } from '@bemedev/subscriber';
+import {
+  createSubscriber,
+  SubscriberBuilder,
+  Subscriber,
+} from '@bemedev/subscriber';
 import { Subject } from 'rxjs';
 import { typeMock } from './fixtures';
 
@@ -27,6 +31,28 @@ describe('Select parent of multiple subscribers Tests', () => {
   const subChild = childBuilder.subscribe(
     typeMock(fnChild, v => v.value + 100),
   );
+
+  describe('#00 => Acceptance', () => {
+    test('#01 => parentBuilder is instance of "SubscriberBuilder"', () => {
+      expect(parentSelectorBuilder).toBeInstanceOf(SubscriberBuilder);
+    });
+
+    test('#02 => childBuilder is instance of "SubscriberBuilder"', () => {
+      expect(childBuilder).toBeInstanceOf(SubscriberBuilder);
+    });
+
+    test('#03 => subP1 is instance of "Subscriber"', () => {
+      expect(subP1).toBeInstanceOf(Subscriber);
+    });
+
+    test('#04 => subP2 is instance of "Subscriber"', () => {
+      expect(subP2).toBeInstanceOf(Subscriber);
+    });
+
+    test('#05 => subChild is instance of "Subscriber"', () => {
+      expect(subChild).toBeInstanceOf(Subscriber);
+    });
+  });
 
   test('#01 => subP1 subscribable is subject$', () => {
     expect(subP1.subscribable).toBe(subject$);

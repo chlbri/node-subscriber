@@ -19,9 +19,12 @@ import type {
  * @template T - Type of data emitted by the source of type {@linkcode Subscribable}.
  * @template R - Type of selected value derived from state, defaulting to `T`.
  */
-class ManagedSubscriberClass<T, R = T> extends SubscriberBaseClass<T, R> {
+export class ManagedSubscriber<T, R = T> extends SubscriberBaseClass<
+  T,
+  R
+> {
   /**
-   * Creates an active instance of class {@linkcode ManagedSubscriberClass}.
+   * Creates an active instance of class {@linkcode ManagedSubscriber}.
    *
    * @param subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
    * @param selector - Optional selector function of type {@linkcode Selector_F}.
@@ -53,22 +56,6 @@ class ManagedSubscriberClass<T, R = T> extends SubscriberBaseClass<T, R> {
 }
 
 /**
- * Type alias for class {@linkcode ManagedSubscriberClass}.
- *
- * @template T - The type of data emitted by the source.
- * @template R - The selected value type, defaults to `T`.
- */
-export type ManagedSusbcriber<T, R = T> = ManagedSubscriberClass<T, R>;
-
-/**
- * Type alias for type {@linkcode ManagedSusbcriber}.
- *
- * @template T - The type of data emitted by the source.
- * @template R - The selected value type, defaults to `T`.
- */
-export type Susbcriber<T, R = T> = ManagedSusbcriber<T, R>;
-
-/**
  * Factory function signature for creating a managed subscriber node of type {@linkcode ManagedSusbcriber}.
  *
  * @template T - Type of data emitted by the source.
@@ -77,12 +64,12 @@ export type Susbcriber<T, R = T> = ManagedSusbcriber<T, R>;
  * @param subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
  * @param options - Optional configuration options of type {@linkcode SusbscriberOptions}.
  *
- * @returns A new instance of class {@linkcode ManagedSubscriberClass}.
+ * @returns A new instance of class {@linkcode ManagedSubscriber}.
  */
 export type CreateManagedSubscriber_F = <T, R = T>(
   subscriber: Subscriber_F<T>,
   options?: SusbscriberOptions<T, R>,
-) => ManagedSusbcriber<T, R>;
+) => ManagedSubscriber<T, R>;
 
 /**
  * Type alias for type {@linkcode CreateManagedSubscriber_F}.
@@ -90,7 +77,7 @@ export type CreateManagedSubscriber_F = <T, R = T>(
 export type CreateSubscriber_F = CreateManagedSubscriber_F;
 
 /**
- * Creates an active managed subscriber node of class {@linkcode ManagedSubscriberClass}.
+ * Creates an active managed subscriber node of class {@linkcode ManagedSubscriber}.
  *
  * @template T - Type of data emitted by the source.
  * @template R - Type of selected value, defaults to `T`.
@@ -98,22 +85,18 @@ export type CreateSubscriber_F = CreateManagedSubscriber_F;
  * @param subscriber - Subscriber callback function of type {@linkcode Subscriber_F}.
  * @param options - Optional configuration options of type {@linkcode SusbscriberOptions}.
  *
- * @returns A new instance of class {@linkcode ManagedSubscriberClass}.
+ * @returns A new instance of class {@linkcode ManagedSubscriber}.
  */
-export const createManagedSubcriber: CreateManagedSubscriber_F = (
+export const createManagedSubscriber: CreateManagedSubscriber_F = (
   subscriber,
   options = {},
 ) => {
   const { equals, selector } = options;
-  const _subscriber = new ManagedSubscriberClass(
-    subscriber,
-    selector,
-    equals,
-  );
+  const _subscriber = new ManagedSubscriber(subscriber, selector, equals);
   return _subscriber;
 };
 
 /**
- * Alias for {@linkcode createManagedSubcriber}.
+ * Alias for {@linkcode createManagedSubscriber}.
  */
-export const createSubscriber = createManagedSubcriber;
+export const createSubscriber = createManagedSubscriber;

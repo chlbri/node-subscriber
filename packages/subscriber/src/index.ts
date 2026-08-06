@@ -12,7 +12,7 @@ export * from './subscriber';
  * Re-exports managed subscriber implementation class and functions.
  */
 export {
-  createManagedSubcriber,
-  type ManagedSusbcriber,
+  createManagedSubscriber as createManagedSubcriber,
+  type ManagedSubscriber,
   type CreateManagedSubscriber_F,
 } from './subscriber.managed';

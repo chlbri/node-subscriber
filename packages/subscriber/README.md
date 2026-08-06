@@ -144,11 +144,19 @@ function run() {
 
 ### `createSubscriber(subscribable)`
 
-Factory function to create a new `SubscriberBuilderClass` instance attached
+Factory function to create a new `SubscriberBuilder` instance attached
 to a subscribable source.
 
 - **`subscribable`**: `Subscribable<T>` — Source subscribable object.
-- **Returns**: `SubscriberBuilderClass<T, T>`
+- **Returns**: `SubscriberBuilder<T, T>`
+
+### `createManagedSubscriber(subscriber, options?)`
+
+Factory function to create a new `ManagedSubscriber` instance.
+
+- **`subscriber`**: `Subscriber_F<T>` — Subscriber callback function.
+- **`options`**: `SusbscriberOptions<T, R>` — Optional configuration (equality comparator, selector).
+- **Returns**: `ManagedSubscriber<T, R>`
 
 ### `defaultSelector(a)`
 
@@ -166,16 +174,16 @@ checker.
 - **`b`**: `T` — Second value to compare.
 - **Returns**: `boolean` — `true` if `a === b`, otherwise `false`.
 
-### `SubscriberBuilderClass<T, R>`
+### `SubscriberBuilder<T, R>`
 
 Builder class used to chain selector transformations and create active
 subscribers.
 
-| Method / Property                | Type / Return                      | Description                                                                            |
-| -------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
-| `subscribable`                   | `Subscribable<T>`                  | Returns attached source subscribable object                                            |
-| `select(selector)`               | `SubscriberBuilderClass<T, RNext>` | Creates a new subscriber builder with a nested selector transformer                    |
-| `subscribe(subscriber, equals?)` | `Subscriber<T, R>`                 | Subscribes callback to state updates with optional equality comparator and starts node |
+| Method / Property                | Type / Return               | Description                                                                            |
+| -------------------------------- | --------------------------- | -------------------------------------------------------------------------------------- |
+| `subscribable`                   | `Subscribable<T>`           | Returns attached source subscribable object                                            |
+| `select(selector)`               | `SubscriberBuilder<T, RNext>` | Creates a new subscriber builder with a nested selector transformer                    |
+| `subscribe(subscriber, equals?)` | `Subscriber<T, R>`          | Subscribes callback to state updates with optional equality comparator and starts node |
 
 ### `Subscriber<T, R>`
 
