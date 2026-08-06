@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/subscriber",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Subscriber package, a recursive subscription manager.",
   "type": "module",
   "main": "lib/index.js",
@@ -20,6 +20,36 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/chlbri/node-subscriber/tree/main/packages/subscriber"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.cjs"
+    },
+    "./types": {
+      "types": "./lib/types.d.ts"
+    },
+    "./helpers": {
+      "import": "./lib/helpers.js",
+      "types": "./lib/helpers.d.ts",
+      "require": "./lib/helpers.cjs"
+    },
+    "./subscriber": {
+      "import": "./lib/subscriber.js",
+      "types": "./lib/subscriber.d.ts",
+      "require": "./lib/subscriber.cjs"
+    },
+    "./base": {
+      "import": "./lib/subscriber.base.js",
+      "types": "./lib/subscriber.base.d.ts",
+      "require": "./lib/subscriber.base.cjs"
+    },
+    "./managed": {
+      "import": "./lib/subscriber.managed.js",
+      "types": "./lib/subscriber.managed.d.ts",
+      "require": "./lib/subscriber.managed.cjs"
+    }
   },
   "maintainers": [
     {

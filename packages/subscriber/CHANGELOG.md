@@ -6,11 +6,35 @@
 <details>
 <summary>
 
+## **[0.5.0] - 06/08/2026** => _15:10_
+
+</summary>
+
+- **Refactor**: Created `BaseSubscriber` abstract base class and
+  `ManagedSubscriber` class, refactoring `Subscriber` to inherit from a
+  common parent class hierarchy
+- **Features**: Added `./base` (`subscriber.base`) and `./managed`
+  (`subscriber.managed`) module subpath exports in `package.json`
+- **Features**: Added `SusbscriberOptions` type definition for subscriber
+  options
+- **Docs**: Enhanced JSDoc documentation standards across all subscriber
+  base, managed, builder, and type definitions
+- <u>Test coverage **_100%_**</u>
+
+</details>
+
+<br/>
+
+<details>
+<summary>
+
 ## **[0.4.0] - 06/08/2026** => _11:32_
 
 </summary>
 
-- **Refactor**: Renamed internal implementation class from `SubscriberClass` to `Subscriber` and exported `Subscriber` class directly
+- **Refactor**: Renamed internal implementation class from
+  `SubscriberClass` to `Subscriber` and exported `Subscriber` class
+  directly
 - **Dependencies**: Updated `rolldown` to `1.2.3`
 - <u>Test coverage **_100%_**</u>
 

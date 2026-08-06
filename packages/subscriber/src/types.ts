@@ -89,7 +89,7 @@ export type CompletionObserver<T> = {
  *
  * @template T - Type of data emitted by the source.
  *
- * @see type {@linkcode NextObserver}, type {@linkcode ErrorObserver}, type {@linkcode CompletionObserver}
+ * @see -- type {@linkcode NextObserver}, -- type {@linkcode ErrorObserver}, -- type {@linkcode CompletionObserver}
  */
 export type PartialObserver<T> =
   | NextObserver<T>
@@ -101,7 +101,7 @@ export type PartialObserver<T> =
  */
 export type Unsubscribable = {
   /**
-   * Function to terminate the subscription.
+   * Function to terminate the subscription of type {@linkcode Fn}.
    */
   unsubscribe: Fn<[], void>;
 };
@@ -115,16 +115,19 @@ export type Unsubscribable = {
 export type Observer<T> = {
   /**
    * Callback function called when the producer emits a value of type `T`.
+   * Represented by type {@linkcode Subscriber_F}.
    */
   next: Subscriber_F<T>;
 
   /**
    * Callback function called when the producer encounters an error.
+   * Represented by type {@linkcode Fn}.
    */
   error: Fn<[err: any], void>;
 
   /**
    * Callback function called when the producer completes.
+   * Represented by type {@linkcode Fn}.
    */
   complete: Fn<[], void>;
 };
@@ -143,7 +146,7 @@ export type SubscriberState =
  *
  * @template T - Type of data passed to the subscriber.
  *
- * @see type {@linkcode Fn}
+ * @see -- type {@linkcode Fn}
  */
 export type Subscriber_F<T> = Fn<[T], void>;
 
@@ -157,7 +160,7 @@ export type Subscriber_F<T> = Fn<[T], void>;
  *
  * @returns type {@linkcode boolean} indicating whether `a` and `b` are equal.
  *
- * @see type {@linkcode Fn}
+ * @see -- type {@linkcode Fn}
  */
 export type Equals_F<T> = Fn<[T, T], boolean>;
 
@@ -171,7 +174,7 @@ export type Equals_F<T> = Fn<[T, T], boolean>;
  *
  * @returns Selected value of type `R`.
  *
- * @see type {@linkcode Fn}
+ * @see -- type {@linkcode Fn}
  */
 export type Selector_F<T, R = any> = Fn<[T], R>;
 
@@ -184,7 +187,7 @@ export type Subscribable<T> = {
   /**
    * Subscribes to emissions using an observer or next callback.
    *
-   * @param observerOrNext - Optional partial observer or next callback function.
+   * @param observerOrNext - Optional partial observer of type {@linkcode PartialObserver} or subscriber callback function of type {@linkcode Subscriber_F}.
    *
    * @returns Subscription handle of type {@linkcode Unsubscribable}.
    */
@@ -192,6 +195,23 @@ export type Subscribable<T> = {
     [observerOrNext?: PartialObserver<T> | Subscriber_F<T>],
     Unsubscribable
   >;
+};
+
+/**
+ * Configuration options for subscriber creation.
+ *
+ * @template T - Type of data emitted by the source.
+ * @template R - Type of selected value derived from state, defaulting to `T`.
+ */
+export type SusbscriberOptions<T, R = T> = {
+  /**
+   * Optional selector function of type {@linkcode Selector_F}.
+   */
+  selector?: Selector_F<T, R>;
+  /**
+   * Optional equality comparator function of type {@linkcode Equals_F}.
+   */
+  equals?: Equals_F<R>;
 };
 
 export type * from '#bemedev/globals/types';

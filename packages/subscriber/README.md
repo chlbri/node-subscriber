@@ -179,7 +179,8 @@ subscribers.
 
 ### `Subscriber<T, R>`
 
-Main class representing an active subscriber node.
+Main class representing an active subscriber node (extends
+`BaseSubscriber`).
 
 | Method / Property         | Type / Return                   | Description                                                                |
 | ------------------------- | ------------------------------- | -------------------------------------------------------------------------- |
@@ -195,6 +196,16 @@ Main class representing an active subscriber node.
 | `dispose()`               | `SubscriberState`               | Cleans up subscriber references and sets state to `'disposed'`             |
 | `[Symbol.dispose]()`      | `SubscriberState`               | Standard synchronous disposal                                              |
 | `[Symbol.asyncDispose]()` | `Promise<SubscriberState>`      | Standard asynchronous disposal                                             |
+
+### `BaseSubscriber<T, R>` (`@bemedev/subscriber/base`)
+
+Abstract base class for subscribers managing subscription state, equality
+checking, and disposal.
+
+### `ManagedSubscriber<T, R>` (`@bemedev/subscriber/managed`)
+
+Managed subscriber class providing subscription lifecycle control methods
+(`close()`, `open()`, `unsubscribe()`, `dispose()`).
 
 <br/>
 

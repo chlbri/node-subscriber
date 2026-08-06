@@ -1,4 +1,4 @@
-import type { Fn } from '@bemedev/subscriber/lib/libs/bemedev/globals/types';
+import type { Fn } from '@bemedev/subscriber/types';
 import type { Mock } from 'vitest';
 
 //TODO: add to my lib @bemedev/dev-utils/vitest-extended

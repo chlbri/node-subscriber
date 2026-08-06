@@ -1,6 +1,7 @@
 import { createSubscriber, normalEquals } from '@bemedev/subscriber';
 import { Subject } from 'rxjs';
 import { typeMock } from './fixtures';
+import { SubscriberBaseClass } from '@bemedev/subscriber/base';
 
 describe('Select options Tests', () => {
   const fn1 = vi.fn();
@@ -29,6 +30,20 @@ describe('Select options Tests', () => {
     typeMock(fn3, n => n + 5),
     sameParity,
   );
+
+  describe('#00 => all susb are instance of "SubscriberBaseClass"', () => {
+    test('#01 => sub1', () => {
+      expect(sub1).toBeInstanceOf(SubscriberBaseClass);
+    });
+
+    test('#02 => sub2', () => {
+      expect(sub2).toBeInstanceOf(SubscriberBaseClass);
+    });
+
+    test('#03 => sub3', () => {
+      expect(sub3).toBeInstanceOf(SubscriberBaseClass);
+    });
+  });
 
   test('#01 => sub1 selector is defined', () => {
     expect(sub1.selector).toBeDefined();
