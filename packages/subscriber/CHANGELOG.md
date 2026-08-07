@@ -10,8 +10,11 @@
 
 </summary>
 
-- **Refactor**: Exported `ManagedSubscriber`, `Subscriber`, and `SubscriberBuilder` classes directly instead of using internal `...Class` names and separate type aliases
-- **Fixes**: Corrected function name spelling to `createManagedSubscriber` (aliased `createManagedSubcriber` for backward compatibility)
+- **Refactor**: Exported `ManagedSubscriber`, `Subscriber`, and
+  `SubscriberBuilder` classes directly instead of using internal `...Class`
+  names and separate type aliases
+- **Fixes**: Corrected function name spelling to `createManagedSubscriber`
+  (aliased `createManagedSubcriber` for backward compatibility)
 - <u>Test coverage **_100%_**</u>
 
 </details>

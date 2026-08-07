@@ -144,8 +144,8 @@ function run() {
 
 ### `createSubscriber(subscribable)`
 
-Factory function to create a new `SubscriberBuilder` instance attached
-to a subscribable source.
+Factory function to create a new `SubscriberBuilder` instance attached to a
+subscribable source.
 
 - **`subscribable`**: `Subscribable<T>` — Source subscribable object.
 - **Returns**: `SubscriberBuilder<T, T>`
@@ -155,7 +155,8 @@ to a subscribable source.
 Factory function to create a new `ManagedSubscriber` instance.
 
 - **`subscriber`**: `Subscriber_F<T>` — Subscriber callback function.
-- **`options`**: `SusbscriberOptions<T, R>` — Optional configuration (equality comparator, selector).
+- **`options`**: `SusbscriberOptions<T, R>` — Optional configuration
+  (equality comparator, selector).
 - **Returns**: `ManagedSubscriber<T, R>`
 
 ### `defaultSelector(a)`
@@ -179,11 +180,11 @@ checker.
 Builder class used to chain selector transformations and create active
 subscribers.
 
-| Method / Property                | Type / Return               | Description                                                                            |
-| -------------------------------- | --------------------------- | -------------------------------------------------------------------------------------- |
-| `subscribable`                   | `Subscribable<T>`           | Returns attached source subscribable object                                            |
+| Method / Property                | Type / Return                 | Description                                                                            |
+| -------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
+| `subscribable`                   | `Subscribable<T>`             | Returns attached source subscribable object                                            |
 | `select(selector)`               | `SubscriberBuilder<T, RNext>` | Creates a new subscriber builder with a nested selector transformer                    |
-| `subscribe(subscriber, equals?)` | `Subscriber<T, R>`          | Subscribes callback to state updates with optional equality comparator and starts node |
+| `subscribe(subscriber, equals?)` | `Subscriber<T, R>`            | Subscribes callback to state updates with optional equality comparator and starts node |
 
 ### `Subscriber<T, R>`
 
