@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/subscriber",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Subscriber package, a recursive subscription manager.",
   "type": "module",
   "main": "lib/index.js",

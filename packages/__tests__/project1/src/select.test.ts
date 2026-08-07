@@ -31,7 +31,7 @@ describe('Select options Tests', () => {
     sameParity,
   );
 
-  describe('#00 => all susb are instance of "SubscriberBaseClass"', () => {
+  describe('#00 => all subs are instance of "SubscriberBaseClass"', () => {
     test('#01 => sub1', () => {
       expect(sub1).toBeInstanceOf(SubscriberBaseClass);
     });
