@@ -83,13 +83,13 @@
     "_ci": "pnpm run lint && pnpm run pretest"
   },
   "devDependencies": {
-    "@bemedev/dev-utils": "^1.1.1",
+    "@bemedev/dev-utils": "^1.5.0",
     "@size-limit/file": "^13.0.3",
-    "@types/node": "^26.1.2",
-    "rolldown": "^1.2.3",
+    "@types/node": "^26.4.0",
+    "rolldown": "^1.2.6",
     "size-limit": "^13.0.3",
     "typescript": "7.0.2",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   },
   "size-limit": [
     {

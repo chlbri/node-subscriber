@@ -17,19 +17,19 @@
     "@tanstack/solid-start": "latest",
     "nitro": "3.0.260610-beta",
     "rxjs": "^7.8.2",
-    "solid-js": "^1.9.14",
+    "solid-js": "^1.9.15",
     "vinxi": "0.5.11"
   },
   "devDependencies": {
-    "@bemedev/dev-utils": "^1.1.1",
+    "@bemedev/dev-utils": "^1.5.0",
     "@solidjs/testing-library": "^0.8.10",
     "@tanstack/solid-router-devtools": "1.167.1",
     "jsdom": "^30.0.1",
-    "oxfmt": "^0.62.0",
-    "oxlint": "^1.77.0",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
     "typescript": "^7.0.2",
-    "vite": "^8.2.1",
+    "vite": "^8.2.2",
     "vite-plugin-solid": "^2.11.14",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   }
 }
